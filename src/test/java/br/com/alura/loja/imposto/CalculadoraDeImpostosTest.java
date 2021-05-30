@@ -12,7 +12,7 @@ public class CalculadoraDeImpostosTest {
 
 	@Test
 	public void deveriaCalcularICMS() {
-		Orcamento orcamento = new Orcamento(new BigDecimal("100"));
+		Orcamento orcamento = Orcamento.builder().valor(new BigDecimal("100")).build();
 		CalculadoraDeImpostos calculadora = new CalculadoraDeImpostos();
 		BigDecimal imposto = calculadora.calcular(orcamento, new ICMS());
 		
@@ -21,7 +21,7 @@ public class CalculadoraDeImpostosTest {
 
 	@Test
 	public void deveriaCalcularISS() {
-		Orcamento orcamento = new Orcamento(new BigDecimal("100"));
+		Orcamento orcamento = Orcamento.builder().valor(new BigDecimal("100")).build();
 		CalculadoraDeImpostos calculadora = new CalculadoraDeImpostos();
 		BigDecimal imposto = calculadora.calcular(orcamento, new ISS());
 		
