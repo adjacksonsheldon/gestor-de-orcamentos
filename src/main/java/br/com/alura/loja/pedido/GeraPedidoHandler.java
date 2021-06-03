@@ -1,13 +1,16 @@
 package br.com.alura.loja.pedido;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import br.com.alura.loja.orcamento.Orcamento;
-import br.com.alura.loja.pedido.acao.EnviarEmail;
-import br.com.alura.loja.pedido.acao.SalvarPedidoNoBancoDeDados;
+import br.com.alura.loja.pedido.acao.AcaoAposGerarPedido;
+import lombok.AllArgsConstructor;
 
-//Implementação do Command Handlers pattern
+@AllArgsConstructor
 public class GeraPedidoHandler {
+	
+	private List<AcaoAposGerarPedido> acoes;
 
 	public void executa(GeraPedido geraPedido) {
 		Orcamento orcamento = Orcamento.builder()
@@ -20,12 +23,8 @@ public class GeraPedidoHandler {
 				.data(LocalDateTime.now())
 				.orcamento(orcamento)
 				.build();
-		
-		EnviarEmail enviarEmail = new EnviarEmail();
-		SalvarPedidoNoBancoDeDados salvar = new SalvarPedidoNoBancoDeDados();
-		
-		enviarEmail.executar(pedido);
-		salvar.executar(pedido);
-		
+
+		//Listener utilizado para chamar o observer
+		acoes.forEach(a -> a.executar(pedido));
 	}
 }

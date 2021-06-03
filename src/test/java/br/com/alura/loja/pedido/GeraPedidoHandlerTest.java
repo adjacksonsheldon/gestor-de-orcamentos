@@ -1,8 +1,12 @@
 package br.com.alura.loja.pedido;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 import org.junit.Test;
+
+import br.com.alura.loja.pedido.acao.EnviarEmail;
+import br.com.alura.loja.pedido.acao.SalvarPedidoNoBancoDeDados;
 
 public class GeraPedidoHandlerTest {
 	@Test
@@ -17,7 +21,7 @@ public class GeraPedidoHandlerTest {
 										.valorOrcamento(valorOrcamento)
 										.build();
 		
-		GeraPedidoHandler geraPedidoHandler = new GeraPedidoHandler();
+		GeraPedidoHandler geraPedidoHandler = new GeraPedidoHandler(Arrays.asList(new SalvarPedidoNoBancoDeDados(), new EnviarEmail()));
 		geraPedidoHandler.executa(gerador);
 	}
 }

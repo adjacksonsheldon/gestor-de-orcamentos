@@ -3,6 +3,7 @@ package br.com.alura.loja.orcamento;
 import java.math.BigDecimal;
 
 import br.com.alura.loja.orcamento.situacao.EmAanalise;
+import br.com.alura.loja.orcamento.situacao.Finalizado;
 import br.com.alura.loja.orcamento.situacao.SituacaoOrcamento;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,5 +37,9 @@ public class Orcamento {
 	
 	public void finalizar() {
 		this.situacao.finalizar(this);
+	}
+
+	public boolean isFinalizado() {
+		return situacao instanceof Finalizado;
 	}
 }
