@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import br.com.alura.loja.pedido.acao.EnviarEmail;
-import br.com.alura.loja.pedido.acao.SalvarPedidoNoBancoDeDados;
+import br.com.alura.loja.pedido.acoes.EnviarEmail;
+import br.com.alura.loja.pedido.acoes.SalvarPedidoNoBancoDeDados;
 
 public class GeraPedidoHandlerTest {
 	@Test
@@ -15,13 +15,14 @@ public class GeraPedidoHandlerTest {
 		String cliente = "Adjackson Sheldon";
 		int quantidadeItens = 4;
 
-		GeraPedido gerador = GeraPedido.builder()
-										.cliente(cliente)
-										.quantidadeItens(quantidadeItens)
-										.valorOrcamento(valorOrcamento)
-										.build();
+		GeraPedido gerador = new GeraPedido(cliente, valorOrcamento, quantidadeItens);
 		
-		GeraPedidoHandler geraPedidoHandler = new GeraPedidoHandler(Arrays.asList(new SalvarPedidoNoBancoDeDados(), new EnviarEmail()));
-		geraPedidoHandler.executa(gerador);
+		GeraPedidoHandler handler = new GeraPedidoHandler(
+				Arrays.asList(
+								new SalvarPedidoNoBancoDeDados()
+							   ,new EnviarEmail()
+							   ,new LogDePedido())
+				);
+		handler.executa(gerador);
 	}
 }

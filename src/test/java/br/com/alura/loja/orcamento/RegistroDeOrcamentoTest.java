@@ -10,10 +10,9 @@ public class RegistroDeOrcamentoTest {
 
 	@Test
 	public void test() {
-		Orcamento orcamento = Orcamento.builder()
-										.valor(BigDecimal.TEN)
-										.quantidadeItens(1)
-										.build();
+		Orcamento orcamento = new Orcamento();
+		orcamento.addItem(new ItemOrcamento(new BigDecimal("10")));
+		
 		orcamento.aprovar();
 		orcamento.finalizar();
 		

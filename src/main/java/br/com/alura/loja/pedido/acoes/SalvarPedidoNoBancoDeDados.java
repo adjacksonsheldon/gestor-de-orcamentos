@@ -1,4 +1,4 @@
-package br.com.alura.loja.pedido.acao;
+package br.com.alura.loja.pedido.acoes;
 
 import br.com.alura.loja.pedido.Pedido;
 
